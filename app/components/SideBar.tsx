@@ -5,7 +5,7 @@ import { sideLink } from "~/static/link"
 const SideBar = () => {
   return (
     <div className="h-screen bg-black-300 border-r-gray-400 border-r-[0.25px] flex flex-col">
-      <div className="w-full p-[10px]">
+      <div className="w-full p-[10px] border-b border-b-gray-400">
         <UserCard />
       </div>
       <div className="w-full p-[10px] flex flex-col gap-[10px] border-b-gray-400 border-b-[0.25px]">
