@@ -8,7 +8,7 @@ const Layout = () => {
       <div className="col-span-2 h-screen">
         <SideBar />
       </div>
-      <div className="col-span-10 flex flex-col h-screen">
+      <div className="col-span-10 flex flex-col h-screen overflow-y-auto no-scrollbar">
         <NavBar />
         <Outlet />
       </div>
