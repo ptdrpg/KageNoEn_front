@@ -5,8 +5,9 @@ import { newGame } from "~/static/party"
 const Menu = () => {
   return (
     <div className="grid grid-cols-4 p-[20px]">
-      <div className="col-span-3">
-
+      <div className="col-span-3 flex flex-col gap-[10px] text-white pr-[20px]">
+        <p className="text-[24px] font-bold text-white">Kage No En</p>
+        <p className="text-[12px] text-justify">Yo, rivals who've been talking smack, teammates who've ghosted you mid-fight, and enemies who've stolen your kills one too many times – your time is UP. Step into the brutal battlegrounds where every match is a raw, no-holds-barred règlement de comptes. This ain't no casual skirmish; it's payback city, pure vengeance served hot with a side of domination.</p>
       </div>
       <div className="flex flex-col gap-[10px] text-white">
         <Tabs defaultValue="account" className="bg-black-300 rounded-[10px]">
