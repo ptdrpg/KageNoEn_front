@@ -4,7 +4,8 @@ import type { userStatusType } from "./status.type"
 
 export type SecureUserRes = {
 	id:        string,
-	username:  string,      
+	username:  string,
+	email: string,      
 	rankId:    string,      
 	rank:      rankType,       
 	statusId:  string,     
