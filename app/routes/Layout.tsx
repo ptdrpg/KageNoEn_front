@@ -1,6 +1,12 @@
 import { Outlet } from "react-router"
 import NavBar from "~/components/NavBar"
 import SideBar from "~/components/SideBar"
+import { requireAuth } from "~/utils/localStorageOperation"
+
+export function loader({ request }: { request: Request }) {
+  requireAuth(request)
+  return null
+}
 
 const Layout = () => {
   return (
