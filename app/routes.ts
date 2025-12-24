@@ -6,5 +6,6 @@ export default [
     route("/settings", "pages/Settings.tsx"),
     route("/community", "pages/Community.tsx")
   ]),
-  route("/login", "pages/Login.tsx")
+  route("/login", "pages/Login.tsx"),
+  route("/.well-known/*", "pages/Empty.tsx"),
 ] satisfies RouteConfig;
