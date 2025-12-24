@@ -37,7 +37,7 @@ export const useRegister = () => {
 export const useLogout = () => {
   const navigate = useNavigate();
   return useMutation({
-    mutationFn: () => authService.logout(),
+    mutationFn: (id: string) => authService.logout(id),
     onSuccess: () => {
       navigate("/login");
     },

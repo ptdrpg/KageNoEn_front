@@ -28,8 +28,8 @@ export class AuthService {
     return response.data;
   };
 
-  logout = async (): Promise<logoutType> => {
-    const response = await apiService.post(SECURITY_CONST.logoutEndpoint);
+  logout = async (id: string): Promise<logoutType> => {
+    const response = await apiService.put(`${SECURITY_CONST.logoutEndpoint}/${id}`);
     toast.success(response.data.message);
     return response.data;
   };

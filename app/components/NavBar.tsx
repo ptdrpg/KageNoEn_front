@@ -1,16 +1,16 @@
 import { Power } from "lucide-react";
-import { useLocation, useNavigate } from "react-router"
+import { useLocation } from "react-router"
 import { useLogout } from "~/query/AUTH/auth.query";
-import { cleanLocalStorage } from "~/utils/local-storage.utils";
+import { cleanLocalStorage, getUserDataToLocalStorage } from "~/utils/local-storage.utils";
 
 const NavBar = () => {
   const locate = useLocation();
-  const navigate = useNavigate();
 
   const { mutate: logout } = useLogout();
+  const data = getUserDataToLocalStorage();
 
   const handleLogout = () => {
-    logout();
+    logout(data?.id);
     cleanLocalStorage();
   }
 
