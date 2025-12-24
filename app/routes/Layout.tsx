@@ -1,10 +1,12 @@
-import { Outlet } from "react-router"
+import { Outlet, redirect } from "react-router"
 import NavBar from "~/components/NavBar"
 import SideBar from "~/components/SideBar"
-import { requireAuth } from "~/utils/localStorageOperation"
 
 export function loader({ request }: { request: Request }) {
-  requireAuth(request)
+  const cookie = request.headers.get("cookie")
+  if (!cookie?.includes("access_token")) {
+    throw redirect("/login")
+  }
   return null
 }
 
