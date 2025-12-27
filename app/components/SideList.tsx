@@ -19,7 +19,7 @@ const SideList = ({ link, icon: Icon, label }: props) => {
   };
 
   return (
-    <div className={`${link === locate.pathname ? "bg-black-100" : ""} flex items-center justify-start gap-[10px] p-[10px] rounded-[5px] cursor-pointer text-white `} onClick={handleNavigate}>
+    <div className={`${link.split("/")[1] === locate.pathname.split("/")[1] ? "bg-black-100" : ""} flex items-center justify-start gap-[10px] p-[10px] rounded-[5px] cursor-pointer text-white `} onClick={handleNavigate}>
       <Icon size={20} color="white" />
       <p className="font-bold text-[12px]">{label}</p>
     </div>

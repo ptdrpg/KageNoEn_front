@@ -13,7 +13,7 @@ export const sideLink = [
     },
     {
         icon: UserIcon,
-        link: "/community",
+        link: "/community/people",
         label: "Community"
     }
 ]
