@@ -16,7 +16,7 @@ export class FriendService {
   }
 
   confirmRequest = async (id: string): Promise<ConfirmFriendRequestType> => {
-    const response = await apiService.put(`${SECURITY_CONST.FriendsEndpoint}/confirm/${id}`);
+    const response = await apiService.put(`${SECURITY_CONST.FriendsEndpoint}/confirm/${id}`,{});
     return response.data.data;
   }
 }
