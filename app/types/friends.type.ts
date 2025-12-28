@@ -4,3 +4,13 @@ export type FriendsType = {
   isOnline: boolean;
   status: string;
 }
+
+export type FriendRequestType = {
+  id: string;
+  username: string;
+}
+
+export type SendFriendRequestType = {
+  sender_id: string;
+  receiver_id: string;
+}

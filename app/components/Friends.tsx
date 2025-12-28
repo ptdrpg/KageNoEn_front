@@ -1,8 +1,19 @@
 import { StaticFriendsList } from "~/static/friends"
 import { Input } from "./ui/input"
 import FriendsListCard from "./FriendsListCard"
+import { useGetAllFriend } from "~/query/friends/friend-query"
+import { getUserDataToLocalStorage } from "~/utils/local-storage.utils"
+import { useLayoutEffect, useState } from "react"
 
 const Friends = () => {
+  const [userId, setUserId] = useState<string>("")
+  useLayoutEffect(()=> {
+    const userData = getUserDataToLocalStorage();
+    if(userData){
+      setUserId(userData.id)
+    }
+  },[])
+  const { data } = useGetAllFriend(userId);
   return (
     <div className="p-[20px]">
       <div className="grid gap-3">
@@ -13,7 +24,7 @@ const Friends = () => {
       </div>
       <div className="flex flex-col gap-[10px] pt-[10px]">
         {
-          StaticFriendsList.map((f, i) => <FriendsListCard key={i} id={f.id} username={f.username} isOnline={f.isOnline} status={f.status} />)
+          data?.map((f, i) => <FriendsListCard key={i} id={f.id} username={f.username} isOnline={f.isOnline} status={f.status} />)
         }
       </div>
     </div>

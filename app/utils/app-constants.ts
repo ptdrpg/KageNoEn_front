@@ -6,5 +6,12 @@ export const SECURITY_CONST = {
   registerEndpoint: "/api/v1/register",
   logoutEndpoint: "/api/v1/logout",
   refreshTokenEndpoint: "/api/v1/refresh",
+  FriendsEndpoint: "/api/v1/friends",
   storageUserDataKeyName: "userData",
 };
+
+export const QUERY_KEY = {
+  friends: {
+    all: ["friends"] as const,
+  }
+}
