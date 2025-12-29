@@ -40,10 +40,10 @@ export const useConfirmFriendRequest = (id: string, usrId: string) => {
   })
 }
 
-export const useSearchPeople = (username: string, options?: Partial<UseQueryOptions<FriendsType[], Error>>) => {
+export const useSearchPeople = (username: string,id: string, options?: Partial<UseQueryOptions<FriendsType[], Error>>) => {
   return useQuery<FriendsType[]>({
     queryKey: [...QUERY_KEY.friends.search, username],
-    queryFn: () => friendService.searchPeople(username),
+    queryFn: () => friendService.searchPeople(username, id),
     enabled: !!username?.trim(), // Optional: prevent running on empty string
     ...options,
   })

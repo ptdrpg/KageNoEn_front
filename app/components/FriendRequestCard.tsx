@@ -6,9 +6,10 @@ type Props = {
   id: string;
   username: string;
   isAdding: boolean;
+  status?: string;
 }
 
-const FriendRequestCard = ({ username, id, isAdding }: Props) => {
+const FriendRequestCard = ({ username, id, isAdding, status }: Props) => {
 
   const [usrId, setUsrId] = useState<string>("");
 
@@ -37,7 +38,7 @@ const FriendRequestCard = ({ username, id, isAdding }: Props) => {
         </div>
       </div>
       <div className="flex items-center justify-center gap-[10px]">
-        <button className="bg-emerald-300 text-white px-[10px] py-[5px] rounded-[5px] text-[12px] cursor-pointer" onClick={handleConfirmRequest}>{ isAdding ? "invite" : "Accept" }</button>
+        <button className="bg-emerald-300 text-white px-[10px] py-[5px] rounded-[5px] text-[12px] cursor-pointer" onClick={handleConfirmRequest}>{ isAdding ? status == "accepted"? "Friends" : "Invite" : "Accept" }</button>
         {
           !isAdding && (
             <button className="bg-red-400 text-white px-[10px] py-[5px] rounded-[5px] text-[12px] cursor-pointer">Decline</button>

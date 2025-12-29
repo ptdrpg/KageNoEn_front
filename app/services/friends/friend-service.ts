@@ -20,8 +20,10 @@ export class FriendService {
     return response.data.data;
   }
 
-  searchPeople = async (username: string): Promise<FriendsType[]> => {
-    const response = await apiService.get(`${SECURITY_CONST.FriendsEndpoint}/search/${username}`);
+  searchPeople = async (username: string, id: string): Promise<FriendsType[]> => {
+    const response = await apiService.get(`${SECURITY_CONST.FriendsEndpoint}/search/${id}?username=${username}`);
+    console.log(response.data);
+    
     return response.data.data;
   }
 }

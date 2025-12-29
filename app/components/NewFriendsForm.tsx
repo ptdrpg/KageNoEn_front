@@ -3,8 +3,9 @@ import { Separator } from "./ui/separator";
 import { useSearchPeople } from "~/query/friends/friend-query";
 import { useForm } from "react-hook-form";
 import { useDebounce } from "~/utils/Debouce";
-import type { FriendRequestType } from "~/types/friends.type";
 import FriendRequestCard from "./FriendRequestCard";
+import { getUserDataToLocalStorage } from "~/utils/local-storage.utils";
+import { useLayoutEffect, useState } from "react";
 
 type SearchInputType = {
   username: string;
@@ -15,11 +16,20 @@ const NewFriendsForm = () => {
     defaultValues: { username: "" },
   });
 
-  const username = watch("username"); // Surveille les changements en temps réel
-  const debouncedUsername = useDebounce(username, 300); // Délai de 300 ms
+  const [usrId, setUserId] = useState<string>("");
 
-  const { data: allRelatedUsers = [] } = useSearchPeople(debouncedUsername, {
-    enabled: !!debouncedUsername.trim(), // Active seulement si non vide
+  useLayoutEffect(()=> {
+    const userData = getUserDataToLocalStorage();
+    if(userData){
+      setUserId(userData.id)
+    }
+  },[])
+
+  const username = watch("username");
+  const debouncedUsername = useDebounce(username, 500);
+
+  const { data: allRelatedUsers = [] } = useSearchPeople(debouncedUsername, usrId, {
+    enabled: !!debouncedUsername.trim(),
   });
 
   return (
@@ -47,6 +57,7 @@ const NewFriendsForm = () => {
                   username={p.username}
                   id={p.id}
                   isAdding={true}
+                  status={p.status}
                 />
               ))
             ) : (
