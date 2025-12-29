@@ -22,7 +22,7 @@ const Inbox = () => {
       </div>
       <div className="flex flex-col gap-[20px] pt-[10px]">
         {
-          !data ? <p className="text-gray-400 text-center text-[12px]">It's Quite for now</p> : data.map((f, i) => <FriendRequestCard key={i} id={f.id} username={f.username} />)
+          !data ? <p className="text-gray-400 text-center text-[12px]">It's Quite for now</p> : data.map((f, i) => <FriendRequestCard key={i} id={f.id} username={f.username} isAdding={false} />)
         }
       </div>
     </div>

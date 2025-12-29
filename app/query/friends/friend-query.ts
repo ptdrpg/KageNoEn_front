@@ -1,8 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, type UseQueryOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { toast } from "sonner";
 import { FriendService } from "~/services/friends/friend-service";
-import type { ConfirmFriendRequestType } from "~/types/friends.type";
+import type { ConfirmFriendRequestType, FriendRequestType, FriendsType } from "~/types/friends.type";
 import { QUERY_KEY } from "~/utils/app-constants";
 
 const friendService = new FriendService();
@@ -37,5 +37,14 @@ export const useConfirmFriendRequest = (id: string, usrId: string) => {
           (axiosError.response?.data.message ?? "Erreur inconnue")
       );
     }
+  })
+}
+
+export const useSearchPeople = (username: string, options?: Partial<UseQueryOptions<FriendsType[], Error>>) => {
+  return useQuery<FriendsType[]>({
+    queryKey: [...QUERY_KEY.friends.search, username],
+    queryFn: () => friendService.searchPeople(username),
+    enabled: !!username?.trim(), // Optional: prevent running on empty string
+    ...options,
   })
 }

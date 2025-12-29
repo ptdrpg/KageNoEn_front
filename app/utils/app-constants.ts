@@ -14,5 +14,6 @@ export const QUERY_KEY = {
   friends: {
     all: ["friends"] as const,
     request: ["request"] as const,
+    search: ["search"] as const,
   }
 }
