@@ -16,7 +16,7 @@ export class FriendService {
   }
 
   confirmRequest = async (id: string): Promise<ConfirmFriendRequestType> => {
-    const response = await apiService.put(`${SECURITY_CONST.FriendsEndpoint}/confirm/${id}`,{});
+    const response = await apiService.put(`${SECURITY_CONST.FriendsEndpoint}/invit/${id}`);
     return response.data.data;
   }
 
@@ -28,6 +28,12 @@ export class FriendService {
 
   sendRequest = async (data: SendFriendRequestType): Promise<ConfirmFriendRequestType> => {
     const response = await apiService.post(SECURITY_CONST.FriendsEndpoint, data);
+
+    return response.data.data;
+  }
+
+  declineRequest = async (invitId: string): Promise<ConfirmFriendRequestType> => {
+    const response = await apiService.delete(`${SECURITY_CONST.FriendsEndpoint}/invit/${invitId}`);
 
     return response.data.data;
   }

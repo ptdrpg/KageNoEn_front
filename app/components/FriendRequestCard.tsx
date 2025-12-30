@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react'
-import { useConfirmFriendRequest, useSendFriendRequest } from '~/query/friends/friend-query';
+import { useConfirmFriendRequest, useDeclineFriendRequest, useSendFriendRequest } from '~/query/friends/friend-query';
 import { getUserDataToLocalStorage } from '~/utils/local-storage.utils';
 
 type Props = {
@@ -23,6 +23,7 @@ const FriendRequestCard = ({ username, id, isAdding, status }: Props) => {
 
   const { mutate: confirmRequest } = useConfirmFriendRequest(id, usrId);
   const { mutate: sendFriendRequest } = useSendFriendRequest();
+  const { mutate: declineRequest } = useDeclineFriendRequest();
 
   const handleConfirmRequest = () => {
     if (!isAdding) {
@@ -34,6 +35,10 @@ const FriendRequestCard = ({ username, id, isAdding, status }: Props) => {
       })
       setButtonLabel("Pending")
     }
+  }
+
+  const handleDeclineRequest = () => {
+    declineRequest(id)
   }
 
   return (
@@ -51,7 +56,7 @@ const FriendRequestCard = ({ username, id, isAdding, status }: Props) => {
         <button className={` text-white px-[10px] py-[5px] rounded-[5px] text-[12px] ${buttonLabel != "Pending" ? "cursor-pointer bg-emerald-300": "bg-gray-400"}`} onClick={handleConfirmRequest}>{ isAdding ? status == "accepted"? "Friends" : "Invite" : buttonLabel == "Pending" ? "Pending" : "Accept" }</button>
         {
           !isAdding && (
-            <button className="bg-red-400 text-white px-[10px] py-[5px] rounded-[5px] text-[12px] cursor-pointer">Decline</button>
+            <button className="bg-red-400 text-white px-[10px] py-[5px] rounded-[5px] text-[12px] cursor-pointer" onClick={handleDeclineRequest}>Decline</button>
           )
         }
       </div>

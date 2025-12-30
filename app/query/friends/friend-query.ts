@@ -7,17 +7,28 @@ import { QUERY_KEY } from "~/utils/app-constants";
 
 const friendService = new FriendService();
 
+export const useSearchPeople = (username: string,id: string, options?: Partial<UseQueryOptions<FriendsType[], Error>>) => {
+  return useQuery<FriendsType[]>({
+    queryKey: [...QUERY_KEY.friends.search, username],
+    queryFn: () => friendService.searchPeople(username, id),
+    enabled: !!username?.trim(),
+    ...options,
+  })
+}
+
 export const useGetAllFriend = (id: string) => {
   return useQuery({
-    queryKey: [...QUERY_KEY.friends.all, id],
+    queryKey: QUERY_KEY.friends.all,
     queryFn: () => friendService.getAllFriends(id),
+    enabled: !!id.trim(),
   })
 }
 
 export const useGetFriendRequest = (id: string) => {
   return useQuery({
-    queryKey: [...QUERY_KEY.friends.request, id],
+    queryKey: QUERY_KEY.friends.request,
     queryFn: () => friendService.getFriendRequest(id),
+    enabled: !!id.trim(),
   })
 }
 
@@ -39,15 +50,6 @@ export const useConfirmFriendRequest = (id: string, usrId: string) => {
   })
 }
 
-export const useSearchPeople = (username: string,id: string, options?: Partial<UseQueryOptions<FriendsType[], Error>>) => {
-  return useQuery<FriendsType[]>({
-    queryKey: [...QUERY_KEY.friends.search, username],
-    queryFn: () => friendService.searchPeople(username, id),
-    enabled: !!username?.trim(),
-    ...options,
-  })
-}
-
 export const useSendFriendRequest = () => {
   return useMutation({
     mutationFn: (data: SendFriendRequestType)=> friendService.sendRequest(data),
@@ -59,3 +61,21 @@ export const useSendFriendRequest = () => {
     },
   })
 } 
+
+export const useDeclineFriendRequest = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (invitId: string): Promise<ConfirmFriendRequestType> => friendService.declineRequest(invitId),
+    onSuccess: (data: ConfirmFriendRequestType)=> {
+      toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.friends.request] });
+      queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.friends.all] });
+    },
+    onError: (error)=> {
+      const axiosError = error as AxiosError<{ message: string }>;
+      toast.error(
+          (axiosError.response?.data.message ?? "Erreur inconnue")
+      );
+    }
+  })
+}

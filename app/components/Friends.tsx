@@ -6,7 +6,7 @@ import { getUserDataToLocalStorage } from "~/utils/local-storage.utils"
 import { useLayoutEffect, useState } from "react"
 
 const Friends = () => {
-  const [userId, setUserId] = useState<string>("")
+  const [userId, setUserId] = useState<string>("");
   useLayoutEffect(()=> {
     const userData = getUserDataToLocalStorage();
     if(userData){
