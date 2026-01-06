@@ -1,5 +1,5 @@
 
-export const SERVER_SIDE_BASE_URL = "http://localhost:4400";
+export const SERVER_SIDE_BASE_URL = "https://localhost:4400";
 
 export const AUTH_CONST = {
   loginEndpoint: "/api/v1/login",
@@ -7,6 +7,7 @@ export const AUTH_CONST = {
   logoutEndpoint: "/api/v1/logout",
   refreshTokenEndpoint: "/api/v1/refresh",
   FriendsEndpoint: "/api/v1/friends",
+  sessionEndpoint: "/api/v1/session",
   storageUserDataKeyName: "userData",
 };
 
@@ -16,5 +17,8 @@ export const QUERY_KEY = {
     request: ["request"] as const,
     search: ["search"] as const,
     add: ["add"] as const,
+  },
+  auth: {
+    session: ["session"] as const,
   }
 }

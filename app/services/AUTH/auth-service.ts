@@ -33,4 +33,13 @@ export class AuthService {
     toast.success(response.data.message);
     return response.data;
   };
+
+  session = async (): Promise<{connection: boolean}> => {
+    try {
+      const response = await apiService.get(AUTH_CONST.sessionEndpoint, {withCredentials: true});
+      return response.data;
+    } catch (error) {
+      return {connection: false};
+    }
+  }
 }
