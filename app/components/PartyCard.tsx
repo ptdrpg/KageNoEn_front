@@ -16,12 +16,12 @@ const PartyCard = ({ label, icon: Icon, descri }: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="w-full bg-black-100 flex items-center justify-start gap-[10px] rounded-[15px] p-[16px] cursor-pointer">
-          <div className="bg-white rounded-[10px] p-[20px]">
-            <Icon size={20} color="black" />
+        <div className="w-full flex items-center justify-start gap-[10px] rounded-[15px] cursor-pointer">
+          <div className="bg-white rounded-[10px] p-[10px]">
+            <Icon size={16} color="black" />
           </div> 
-          <div className="flex flex-col gap-[5px]">
-            <p className="font-bold text-[16px] text-white">{ label }</p>
+          <div className="flex flex-col">
+            <p className="font-bold text-[12px] text-white">{ label }</p>
             <p className="text-[8px] text-white text-start">{ descri }</p>
           </div>
         </div>

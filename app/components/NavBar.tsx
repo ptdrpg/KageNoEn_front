@@ -15,7 +15,7 @@ const NavBar = () => {
   }
 
   return (
-    <div className="w-full pt-[10px] pb-[10px] pl-[20px] pr-[20px] flex items-center justify-between">
+    <div className="w-full pt-[10px] pb-[10px] pl-[20px] pr-[20px] flex items-center justify-between border-b border-b-gray-400">
       <p className="font-black text-[16px] text-white">{ locate.pathname === "/" ? "Menu" : locate.pathname === "/settings" ? "Settings" : "Community" }</p>
       <div className="flex items-center gap-[10px] cursor-pointer" onClick={handleLogout}>
         <p className="text-white text-[12px]">Logout</p>
